@@ -1,7 +1,7 @@
 import React from 'react';
 import * as Constants from './Constants';
 
-const deathCornerStyle = {
+const validationStyle = {
     gridColumn: "1",
     gridRow: "1",
     boxSizing: "border-box"
@@ -17,6 +17,6 @@ export default function Validation({ userSolution }) {
     const isValid = areTheSame(Constants.BOARD_CELLS, userSolution);
     const color = isValid ? "#ffd31d" : "#aacfcf";
     return (
-        <div style={{ ...deathCornerStyle, backgroundColor: color }} />
+        <div style={{ ...validationStyle, backgroundColor: color }} />
     )
 }

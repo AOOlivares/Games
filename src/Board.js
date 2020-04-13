@@ -1,49 +1,51 @@
 import React, { useState } from 'react';
 import * as Constants from './Constants';
 
-const boardStyle = {
-    gridColumn: "2 / 4",
-    gridRow: "2 / 4",
-    boxSizing: "border-box",
+const styles = {
+    board: {
+        gridColumn: "2 / 4",
+        gridRow: "2 / 4",
+        boxSizing: "border-box",
+    },
+    boardGrid: {
+        display: "grid",
+        gridGap: "3px",
+        height: "100%"
+    },
+    cell: {
+        boxSizing: "border-box",
+        height: "100%"
+    },
+    hitColors: {
+        hit: '#75daad',
+        empty: '#ffc299'
+    }
 }
 
-const boardWrapperStyle = {
-    display: "grid",
-    gridGap: "3px",
-    height: "100%"
-}
-
-const boardItemStyle = {
-    boxSizing: "border-box",
-    height: "100%"
-}
-
-const hitColors = {
-    hit: '#75daad',
-    empty: '#ffc299'
-}
-
-const NonoBox = ({ setHit, index }) => {
-    const [color, setColor] = useState(hitColors.empty);
+const Cell = ({ setHit, index }) => {
+    const [color, setColor] = useState(styles.hitColors.empty);
     function handleClick() {
-        if (color === hitColors.empty) {
+        if (color === styles.hitColors.empty) {
             setHit({ type: 'active', index: index })
-            setColor(hitColors.hit);
+            setColor(styles.hitColors.hit);
         } else {
             setHit({ type: 'inactive', index: index })
-            setColor(hitColors.empty);
+            setColor(styles.hitColors.empty);
         }
     }
 
-    return <div onClick={handleClick} style={{ ...boardItemStyle, backgroundColor: color }} />;
+    return <div onClick={handleClick} style={{ ...styles.cell, backgroundColor: color }} />;
 }
 
-export default function Board({ numberOfRows, numberOfColumns, setHit }) {
-    return (
-        <div style={boardStyle}>
-            <div style={{ ...boardWrapperStyle, gridTemplateColumns: `repeat(${numberOfColumns}, 1fr)`, gridTemplateRows: `repeat(${numberOfRows}, 1fr)` }}>
-                {Constants.BOARD_CELLS.map((cell, index) => <NonoBox setHit={setHit} index={index} key={index} />)}
-            </div>
-        </div>
-    )
-}
+const BoardGrid = ({ numberOfRows, numberOfColumns, setHit }) =>
+    <div style={{ ...styles.boardGrid, gridTemplateColumns: `repeat(${numberOfColumns}, 1fr)`, gridTemplateRows: `repeat(${numberOfRows}, 1fr)` }}>
+        {Constants.BOARD_CELLS.map((cell, index) => <Cell setHit={setHit} index={index} key={index} />)}
+    </div>
+
+const Board = (props) => (
+    <div style={styles.board}>
+        <BoardGrid {...props} />
+    </div>
+)
+
+export default Board;
