@@ -1,7 +1,7 @@
-import React, { useReducer } from 'react';
+import React, { useReducer, useState } from 'react';
 import Board from './Board';
 import Headers from './Headers';
-import Validation from './Validation';
+import Navigator from './Navigator';
 import * as Constants from './Constants';
 
 const initialState = Constants.BOARD_CELLS.map(() => Constants.EMPTY);
@@ -33,11 +33,12 @@ const reducer = (state, action) => {
 
 const Game = () => {
   const [userSolution, dispatch] = useReducer(reducer, initialState);
+  const [clickType, setClickType] = useState(Constants.CLICKTYPES.Hit)
   return (
     <div style={wrapperStyle}>
-      <Validation userSolution={userSolution} />
+      <Navigator userSolution={userSolution} setClickType={setClickType} />
       <Headers userSolution={userSolution} />
-      <Board setHit={dispatch} numberOfRows={Constants.MATRIX.length} numberOfColumns={Constants.MATRIX[0].length} />
+      <Board clickType={clickType} setHit={dispatch} numberOfRows={Constants.MATRIX.length} numberOfColumns={Constants.MATRIX[0].length} />
     </div>
   )
 }

@@ -1,13 +1,10 @@
 import React from 'react';
+import Completed from './Completed';
+import Menu from './Menu';
 import * as Constants from './Constants';
 
-const validationStyle = {
-    gridColumn: "1",
-    gridRow: "1",
-    boxSizing: "border-box"
-}
+export default function Navigator({ userSolution, setClickType }) {
 
-export default function Validation({ userSolution }) {
     const areTheSame = (solution, userSolution) => {
         const result = solution.map((x, i) => x === userSolution[i]);
 
@@ -15,8 +12,13 @@ export default function Validation({ userSolution }) {
     }
 
     const isValid = areTheSame(Constants.BOARD_CELLS, userSolution);
-    const color = isValid ? "#ffd31d" : "#aacfcf";
+
+    const child = isValid
+        ? <Completed />
+        : <Menu setClickType={setClickType} />
     return (
-        <div style={{ ...validationStyle, backgroundColor: color }} />
+        <>
+            {child}
+        </>
     )
 }
