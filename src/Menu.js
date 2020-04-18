@@ -26,19 +26,7 @@ const style = {
 
 export default function Menu({ setClickType }) {
     function onClick(e) {
-        switch (e.currentTarget.id) {
-            case CLICKTYPES.Hit:
-                setClickType(CLICKTYPES.Hit);
-                break;
-            case CLICKTYPES.Cross:
-                setClickType(CLICKTYPES.Cross)
-                break;
-            case CLICKTYPES.Unknown:
-                setClickType(CLICKTYPES.Unknown)
-                break;
-            default:
-                break;
-        }
+        setClickType(e.currentTarget.id);
     }
     return (
         <div style={style.wrapper}>

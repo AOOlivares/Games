@@ -4,10 +4,17 @@ import Menu from './Menu';
 import * as Constants from './Constants';
 
 export default function Navigator({ userSolution, setClickType }) {
-
     const areTheSame = (solution, userSolution) => {
-        const result = solution.map((x, i) => x === userSolution[i]);
+        const result = solution.map((x, i) => {
+            let userInput = Constants.EMPTY
+            if (userSolution[i].hited) {
+                if (userSolution[i].hitType === Constants.CLICKTYPES.Hit) {
+                    userInput = Constants.HIT
+                }
+            }
 
+            return x === userInput;
+        });
         return result.every(r => r === true);
     }
 

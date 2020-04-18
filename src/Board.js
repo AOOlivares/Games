@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useReducer } from 'react';
 import * as Constants from './Constants';
 
 const styles = {
@@ -28,39 +28,38 @@ const styles = {
     }
 }
 
-const Cell = ({ setHit, index, clickType }) => {
-    const [color, setColor] = useState(styles.hitColors.empty);
-    const [value, setValue] = useState('');
-    function handleClick() {
-        switch (clickType) {
-            case Constants.CLICKTYPES.Hit:
-                setValue('');
-                break;
-            case Constants.CLICKTYPES.Cross:
-                setValue('X');
-                break;
-            case Constants.CLICKTYPES.Unknown:
-                setValue('?')
-                break;
-            default:
-                break;
-        }
-        if (color === styles.hitColors.empty) {
-            setHit({ type: 'active', index: index });
-            setColor(styles.hitColors.hit);
-        } else {
-            setHit({ type: 'inactive', index: index });
-            setValue('');
-            setColor(styles.hitColors.empty);
-        }
-    }
+const initialState = { color: styles.hitColors.empty, value: '' };
 
-    return <div onClick={handleClick} style={{ ...styles.cell, backgroundColor: color }} >{value}</div>;
+const reducer = (state, action) => {
+    switch (action.type) {
+        case Constants.CLICKTYPES.Hit:
+            return { value: '', color: styles.hitColors.hit }
+        case Constants.CLICKTYPES.Cross:
+            return { value: Constants.CLICKTYPES.Cross, color: styles.hitColors.hit }
+        case Constants.CLICKTYPES.Unknown:
+            return { value: Constants.CLICKTYPES.Unknown, color: styles.hitColors.hit }
+        default:
+            return { value: '', color: styles.hitColors.empty }
+    }
 }
 
-const BoardGrid = ({ numberOfRows, numberOfColumns, setHit, clickType }) =>
+const Cell = ({ setHit, index, clickType, cell }) => {
+    const [state, dispatch] = useReducer(reducer, initialState)
+    function handleClick() {
+        const type = cell.hitType === clickType
+            ? Constants.CLICKTYPES.Clear
+            : clickType;
+
+        dispatch({ type: type });
+        setHit({ type: type, index: index });
+    }
+
+    return <div onClick={handleClick} style={{ ...styles.cell, backgroundColor: state.color }} >{state.value}</div>;
+}
+
+const BoardGrid = ({ numberOfRows, numberOfColumns, setHit, clickType, userSolution }) =>
     <div style={{ ...styles.boardGrid, gridTemplateColumns: `repeat(${numberOfColumns}, 1fr)`, gridTemplateRows: `repeat(${numberOfRows}, 1fr)` }}>
-        {Constants.BOARD_CELLS.map((cell, index) => <Cell setHit={setHit} clickType={clickType} index={index} key={index} />)}
+        {userSolution.map((cell, index) => <Cell cell={cell} setHit={setHit} clickType={clickType} index={index} key={index} />)}
     </div>
 
 const Board = (props) => (

@@ -1,10 +1,10 @@
 import React, { useReducer, useState } from 'react';
 import Board from './Board';
-import Headers from './Headers';
+import HeadersInformation from './HeadersInformation';
 import Navigator from './Navigator';
 import * as Constants from './Constants';
 
-const initialState = Constants.BOARD_CELLS.map(() => Constants.EMPTY);
+const initialState = Constants.BOARD_CELLS.map(() => ({ hited: false }));
 
 const wrapperStyle = {
   display: "grid",
@@ -18,14 +18,18 @@ const wrapperStyle = {
 
 const reducer = (state, action) => {
   switch (action.type) {
-    case 'active':
-      state[action.index] = Constants.HIT;
+    case Constants.CLICKTYPES.Hit:
+      state[action.index] = { hitType: action.type, hited: true };
       return [...state];
-    case 'inactive':
-      state[action.index] = Constants.EMPTY;
+    case Constants.CLICKTYPES.Cross:
+      state[action.index] = { hitType: action.type, hited: true }
       return [...state];
-    case 'reset':
-      return []
+    case Constants.CLICKTYPES.Unknown:
+      state[action.index] = { hitType: action.type, hited: true }
+      return [...state];
+    case Constants.CLICKTYPES.Clear:
+      state[action.index] = { hited: false }
+      return [...state];
     default:
       throw new Error();
   }
@@ -33,12 +37,12 @@ const reducer = (state, action) => {
 
 const Game = () => {
   const [userSolution, dispatch] = useReducer(reducer, initialState);
-  const [clickType, setClickType] = useState(Constants.CLICKTYPES.Hit)
+  const [clickType, setClickType] = useState(Constants.CLICKTYPES.Hit);
   return (
     <div style={wrapperStyle}>
       <Navigator userSolution={userSolution} setClickType={setClickType} />
-      <Headers userSolution={userSolution} />
-      <Board clickType={clickType} setHit={dispatch} numberOfRows={Constants.MATRIX.length} numberOfColumns={Constants.MATRIX[0].length} />
+      <HeadersInformation userSolution={userSolution} />
+      <Board userSolution={userSolution} clickType={clickType} setHit={dispatch} numberOfRows={Constants.MATRIX.length} numberOfColumns={Constants.MATRIX[0].length} />
     </div>
   )
 }
