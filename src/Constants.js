@@ -3,7 +3,7 @@ export const EMPTY = '0';
 export const END_OF_HIT = HIT + EMPTY;
 export const MATRIX = [
     [HIT, EMPTY, HIT],
-    [HIT, EMPTY, HIT]
+    [HIT, EMPTY, EMPTY]
 ];
 export const BOARD_CELLS = [].concat(...Object.freeze(MATRIX));
 
