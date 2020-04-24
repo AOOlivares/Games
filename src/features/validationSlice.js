@@ -9,6 +9,11 @@ export const validationSlice = createSlice({
         completed: false
     },
     reducers: {
+        setValidationToInitialState: (state, action) => {
+            state.rows = {};
+            state.columns = {};
+            state.completed = false;
+        },
         setRowsValidation: (state, action) => {
             const { index, value } = action.payload;
             state.rows[index] = value;
@@ -23,7 +28,7 @@ export const validationSlice = createSlice({
     },
 });
 
-export const { setRowsValidation, setColumnsValidation, setPuzzleCompleted } = validationSlice.actions;
+export const { setRowsValidation, setColumnsValidation, setPuzzleCompleted, setValidationToInitialState } = validationSlice.actions;
 
 export const selectCompleted = state => state.validation.completed;
 export const selectRowsValidation = state => state.validation.rows;
