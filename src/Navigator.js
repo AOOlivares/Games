@@ -3,16 +3,16 @@ import { useSelector } from 'react-redux';
 import Completed from './Completed';
 import Menu from './Menu';
 import * as Constants from './Constants';
-import { selectUserSolution } from './features/userSolutionSlice';
+import { selectAnswer } from './features/answerSlice';
 
 export default function Navigator({ setClickType }) {
-    const userSolution = useSelector(selectUserSolution);
+    const answer = useSelector(selectAnswer);
 
-    const areTheSame = (solution, userSolution) => {
+    const areTheSame = (solution, answer) => {
         const result = solution.map((x, i) => {
             let userInput = Constants.EMPTY
-            if (userSolution[i].hited) {
-                if (userSolution[i].hitType === Constants.CLICKTYPES.Hit) {
+            if (answer[i].hited) {
+                if (answer[i].hitType === Constants.CLICKTYPES.Hit) {
                     userInput = Constants.HIT
                 }
             }
@@ -22,7 +22,7 @@ export default function Navigator({ setClickType }) {
         return result.every(r => r === true);
     }
 
-    const isValid = areTheSame(Constants.BOARD_CELLS, userSolution);
+    const isValid = areTheSame(Constants.BOARD_CELLS, answer);
 
     const child = isValid
         ? <Completed />

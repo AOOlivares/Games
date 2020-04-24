@@ -1,7 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit';
-import userSolutionReducer from '../features/userSolutionSlice';
+import userAnswerReducer from '../features/answerSlice';
+import clickTypeReducer from '../features/clickTypeSlice';
 export default configureStore({
     reducer: {
-        userSolution: userSolutionReducer
+        answer: userAnswerReducer,
+        clickType: clickTypeReducer
     },
 });

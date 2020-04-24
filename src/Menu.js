@@ -1,5 +1,8 @@
 import React from 'react';
 import { CLICKTYPES } from './Constants';
+import { useDispatch } from 'react-redux';
+import { setClickType } from './features/clickTypeSlice';
+
 const style = {
     wrapper: {
         gridColumn: "1",
@@ -24,9 +27,10 @@ const style = {
     }
 }
 
-export default function Menu({ setClickType }) {
+export default function Menu() {
+    const dispatch = useDispatch();
     function onClick(e) {
-        setClickType(e.currentTarget.id);
+        dispatch(setClickType(e.currentTarget.id));
     }
     return (
         <div style={style.wrapper}>

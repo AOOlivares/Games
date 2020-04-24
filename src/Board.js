@@ -1,7 +1,8 @@
 import React, { useReducer } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import * as Constants from './Constants';
-import { setHit, selectUserSolution } from './features/userSolutionSlice';
+import { setHit, selectAnswer } from './features/answerSlice';
+import { selectClickType } from './features/clickTypeSlice';
 
 const styles = {
     board: {
@@ -45,8 +46,10 @@ const reducer = (state, action) => {
     }
 }
 
-const Cell = ({ index, clickType, cell }) => {
-    const [state, dispatch] = useReducer(reducer, initialState)
+const Cell = ({ index, cell }) => {
+    const [state, dispatch] = useReducer(reducer, initialState);
+    const clickType = useSelector(selectClickType);
+
     const dispatchUserSoltuion = useDispatch();
     function handleClick() {
         const type = cell.hitType === clickType
@@ -60,13 +63,13 @@ const Cell = ({ index, clickType, cell }) => {
     return <div onClick={handleClick} style={{ ...styles.cell, backgroundColor: state.color }} >{state.value}</div>;
 }
 
-const BoardGrid = ({ numberOfRows, numberOfColumns, clickType, userSolution }) =>
+const BoardGrid = ({ numberOfRows, numberOfColumns, userSolution }) =>
     <div style={{ ...styles.boardGrid, gridTemplateColumns: `repeat(${numberOfColumns}, 1fr)`, gridTemplateRows: `repeat(${numberOfRows}, 1fr)` }}>
-        {userSolution.map((cell, index) => <Cell cell={cell} clickType={clickType} index={index} key={index} />)}
+        {userSolution.map((cell, index) => <Cell cell={cell} index={index} key={index} />)}
     </div>
 
 const Board = (props) => {
-    const userSolution = useSelector(selectUserSolution);
+    const userSolution = useSelector(selectAnswer);
 
     return (
         <div style={styles.board}>

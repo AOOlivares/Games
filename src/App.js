@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Board from './Board';
 import HeadersInformation from './HeadersInformation';
 import Navigator from './Navigator';
@@ -15,12 +15,11 @@ const wrapperStyle = {
 }
 
 const Game = () => {
-  const [clickType, setClickType] = useState(Constants.CLICKTYPES.Hit);
   return (
     <div style={wrapperStyle}>
-      <Navigator setClickType={setClickType} />
+      <Navigator />
       <HeadersInformation />
-      <Board clickType={clickType} numberOfRows={Constants.MATRIX.length} numberOfColumns={Constants.MATRIX[0].length} />
+      <Board numberOfRows={Constants.MATRIX.length} numberOfColumns={Constants.MATRIX[0].length} />
     </div>
   )
 }

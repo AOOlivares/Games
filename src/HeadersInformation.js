@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import * as Constants from './Constants';
 import { HeadersInformationProperties, HeaderHelperMethods } from './HeadersInformationUtils';
-import { selectUserSolution } from './features/userSolutionSlice';
+import { selectAnswer } from './features/answerSlice';
 
 const headersInfoProperties = HeadersInformationProperties(Constants.MATRIX);
 const headerHelperMethods = HeaderHelperMethods();
@@ -38,8 +38,8 @@ const styles = {
 
 const Panel = ({ backgroundColor, value, }) => <div style={{ ...styles.panel, backgroundColor: backgroundColor }}>{value}</div>;
 
-const Header = ({ headerValues, userSolution, possibleSolutions, alignment }) => {
-    const areTheSameStyle = headerHelperMethods.isUserSolutionPotentiallyValid(userSolution, possibleSolutions);
+const Header = ({ headerValues, userAnswer, possibleSolutions, alignment }) => {
+    const areTheSameStyle = headerHelperMethods.isUserSolutionPotentiallyValid(userAnswer, possibleSolutions);
     const backgroundColor = areTheSameStyle ? "#79d279" : "#ff6363";
     if (headerValues.length === 0) {
         return (
@@ -57,21 +57,21 @@ const Header = ({ headerValues, userSolution, possibleSolutions, alignment }) =>
     )
 }
 
-const Headers = ({ alignment, headersValues, gridTemplate, userSolution, potentialSolutions }) => (
+const Headers = ({ alignment, headersValues, gridTemplate, userAnswer, potentialSolutions }) => (
     <div style={{ ...styles.headers, ...gridTemplate }}>
         {headersValues.map((headerValues, index) => (
             <Header
                 alignment={alignment}
                 key={index}
                 headerValues={headerValues}
-                userSolution={userSolution[index]}
+                userAnswer={userAnswer[index]}
                 possibleSolutions={potentialSolutions[index]}
             />
         ))}
     </div>
 )
 
-const RowHeaders = ({ userSolution }) => {
+const RowHeaders = ({ userAnswer }) => {
     const gridTemplate = { gridTemplateRows: `repeat(${headersInfoProperties.rowHeaderValues.length}, 1fr)` };
     const vertical = { gridAutoFlow: "column" };
     return (
@@ -80,20 +80,20 @@ const RowHeaders = ({ userSolution }) => {
                 alignment={vertical}
                 headersValues={headersInfoProperties.rowHeaderValues}
                 gridTemplate={gridTemplate}
-                userSolution={userSolution}
+                userAnswer={userAnswer}
                 potentialSolutions={headersInfoProperties.rowsPotentialSolutions} />
         </div>
     )
 }
 
-const ColumnHeaders = ({ userSolution }) => {
+const ColumnHeaders = ({ userAnswer }) => {
     const gridTemplate = { gridTemplateColumns: `repeat(${headersInfoProperties.columHeaderValues.length}, 1fr)` };
     return (
         <div style={styles.columnHeaders}>
             <Headers
                 headersValues={headersInfoProperties.columHeaderValues}
                 gridTemplate={gridTemplate}
-                userSolution={userSolution}
+                userAnswer={userAnswer}
                 potentialSolutions={headersInfoProperties.columnsPotentialSolutions} />
         </div>
     )
@@ -113,14 +113,14 @@ const verticalChunk = (horizontalChunks, columns) => {
 }
 
 export default function HeadersInformation() {
-    const userSolution = useSelector(selectUserSolution);
+    const userAnswer = useSelector(selectAnswer);
 
-    const hChunks = chunk(userSolution, headersInfoProperties.columHeaderValues.length);
+    const hChunks = chunk(userAnswer, headersInfoProperties.columHeaderValues.length);
     const vChunks = verticalChunk(hChunks, Constants.MATRIX[0].length);
     return (
         <>
-            <ColumnHeaders userSolution={vChunks} />
-            <RowHeaders userSolution={hChunks} />
+            <ColumnHeaders userAnswer={vChunks} />
+            <RowHeaders userAnswer={hChunks} />
         </>
     )
 } 
