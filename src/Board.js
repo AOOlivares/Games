@@ -46,7 +46,7 @@ const reducer = (state, action) => {
     }
 }
 
-const Cell = ({ index, cell }) => {
+const Cell = ({ iX, iY, cell }) => {
     const [state, dispatch] = useReducer(reducer, initialState);
     const clickType = useSelector(selectClickType);
 
@@ -57,7 +57,7 @@ const Cell = ({ index, cell }) => {
             : clickType;
 
         dispatch({ type: type });
-        dispatchUserSoltuion(setHit({ type: type, index: index }));
+        dispatchUserSoltuion(setHit({ type: type, iX: iX, iY: iY }));
     }
 
     return <div onClick={handleClick} style={{ ...styles.cell, backgroundColor: state.color }} >{state.value}</div>;
@@ -65,7 +65,7 @@ const Cell = ({ index, cell }) => {
 
 const BoardGrid = ({ numberOfRows, numberOfColumns, userSolution }) =>
     <div style={{ ...styles.boardGrid, gridTemplateColumns: `repeat(${numberOfColumns}, 1fr)`, gridTemplateRows: `repeat(${numberOfRows}, 1fr)` }}>
-        {userSolution.map((cell, index) => <Cell cell={cell} index={index} key={index} />)}
+        {userSolution.map((subArray, iX) => subArray.map((cell, iY) => <Cell cell={cell} iX={iX} iY={iY} key={`${iX}${iY}`} />))}
     </div>
 
 const Board = (props) => {

@@ -2,27 +2,27 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import Completed from './Completed';
 import Menu from './Menu';
-import * as Constants from './Constants';
+import { EMPTY, HIT, CLICKTYPES, MATRIX } from './Constants';
 import { selectAnswer } from './features/answerSlice';
 
 export default function Navigator({ setClickType }) {
     const answer = useSelector(selectAnswer);
 
     const areTheSame = (solution, answer) => {
-        const result = solution.map((x, i) => {
-            let userInput = Constants.EMPTY
-            if (answer[i].hited) {
-                if (answer[i].hitType === Constants.CLICKTYPES.Hit) {
-                    userInput = Constants.HIT
+        const result2 = solution.map((subArray, index) => subArray.map((value, subIndex) => {
+            let userInput = EMPTY
+            if (answer[index][subIndex].hited) {
+                if (answer[index][subIndex].hitType === CLICKTYPES.Hit) {
+                    userInput = HIT
                 }
             }
 
-            return x === userInput;
-        });
-        return result.every(r => r === true);
+            return value === userInput;
+        }));
+        return result2.every(subArray => subArray.every(r => r === true));
     }
 
-    const isValid = areTheSame(Constants.BOARD_CELLS, answer);
+    const isValid = areTheSame(MATRIX, answer);
 
     const child = isValid
         ? <Completed />

@@ -5,8 +5,6 @@ export const MATRIX = [
     [HIT, EMPTY, HIT],
     [HIT, EMPTY, EMPTY]
 ];
-export const BOARD_CELLS = [].concat(...Object.freeze(MATRIX));
-
 export const CLICKTYPES = {
     Hit: 'hit',
     Cross: 'X',

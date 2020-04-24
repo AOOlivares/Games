@@ -99,12 +99,7 @@ const ColumnHeaders = ({ userAnswer }) => {
     )
 }
 
-const chunk = (arr, size) =>
-    Array.from({ length: Math.ceil(arr.length / size) }, (v, i) =>
-        arr.slice(i * size, i * size + size)
-    );
-
-const verticalChunk = (horizontalChunks, columns) => {
+const verticalChunks = (horizontalChunks, columns) => {
     const vChunks = [];
     for (let index = 0; index < columns; index++) {
         vChunks.push(horizontalChunks.map((v, i, array) => array[i][index]))
@@ -114,13 +109,12 @@ const verticalChunk = (horizontalChunks, columns) => {
 
 export default function HeadersInformation() {
     const userAnswer = useSelector(selectAnswer);
+    const vChunks = verticalChunks(userAnswer, Constants.MATRIX[0].length);
 
-    const hChunks = chunk(userAnswer, headersInfoProperties.columHeaderValues.length);
-    const vChunks = verticalChunk(hChunks, Constants.MATRIX[0].length);
     return (
         <>
             <ColumnHeaders userAnswer={vChunks} />
-            <RowHeaders userAnswer={hChunks} />
+            <RowHeaders userAnswer={userAnswer} />
         </>
     )
 } 
