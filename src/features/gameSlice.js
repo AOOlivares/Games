@@ -1,36 +1,53 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { HIT, EMPTY } from '../Constants';
+import { rowValuesReducer, columnValuesReducer, calculateArrayPossibilities } from '../HeadersInformationUtils';
+
 export const gameSlice = createSlice({
     name: 'game',
     initialState: {
         matrix: [
             [HIT, EMPTY, HIT],
             [HIT, EMPTY, EMPTY]
-        ]
+        ],
+        rowValues: [[]],
+        columnValues: [[]],
+        rowPossibilities: [[]],
+        columnPossibilities: [[]]
     },
     reducers: {
-        increment: state => {
-            // Redux Toolkit allows us to write "mutating" logic in reducers. It
-            // doesn't actually mutate the state because it uses the Immer library,
-            // which detects changes to a "draft state" and produces a brand new
-            // immutable state based off those changes
-            state.value += 1;
+        setRowValues: (state, action) => {
+            state.rowValues = action.payload;
         },
-        decrement: state => {
-            state.value -= 1;
+        setColumnValues: (state, action) => {
+            state.columnValues = action.payload;
         },
-        incrementByAmount: (state, action) => {
-            state.value += action.payload;
+        setRowsPossibilities: (state, action) => {
+            state.rowPossibilities = action.payload;
+        },
+        setColumnsPossibilities: (state, action) => {
+            state.columnPossibilities = action.payload;
         },
     },
 });
 
-export const { increment, decrement, incrementByAmount } = gameSlice.actions;
+export const { setRowValues, setColumnValues, setRowsPossibilities, setColumnsPossibilities } = gameSlice.actions;
 
-// The function below is called a selector and allows us to select a value from
-// the state. Selectors can also be defined inline where they're used instead of
-// in the slice file. For example: `useSelector((state) => state.counter.value)`
-export const selectMatrix = state => state.matrix;
-export const selectBoardCells = state => [].concat(...state.matrix);
+export const selectMatrix = state => state.game.matrix;
+export const selectRowValues = state => state.game.rowValues;
+export const selectColumnValues = state => state.game.columnValues;
+export const selectRowsPossibilities = state => state.game.rowPossibilities;
+export const selectColumnPossibilities = state => state.game.columnPossibilities;
 
 export default gameSlice.reducer;
+
+export const hydrateGameInformation = (matrix) => dispatch => {
+    const rowValues = rowValuesReducer(matrix);
+    dispatch(setRowValues(rowValues));
+    const rowPossibilities = calculateArrayPossibilities(rowValues, matrix[0].length);
+    dispatch(setRowsPossibilities(rowPossibilities));
+    const columnValues = columnValuesReducer(matrix);
+    dispatch(setColumnValues(columnValues));
+    const columnPossibilities = calculateArrayPossibilities(columnValues, matrix.length);
+    dispatch(setColumnsPossibilities(columnPossibilities));
+}
+

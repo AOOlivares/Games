@@ -1,10 +1,10 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import * as Constants from './Constants';
-import { HeadersInformationProperties, HeaderHelperMethods } from './HeadersInformationUtils';
+import { HeaderHelperMethods } from './HeadersInformationUtils';
 import { selectAnswer } from './features/answerSlice';
+import { selectRowValues, selectColumnValues, selectRowsPossibilities, selectColumnPossibilities } from './features/gameSlice';
 
-const headersInfoProperties = HeadersInformationProperties(Constants.MATRIX);
 const headerHelperMethods = HeaderHelperMethods();
 
 const styles = {
@@ -72,29 +72,33 @@ const Headers = ({ alignment, headersValues, gridTemplate, userAnswer, potential
 )
 
 const RowHeaders = ({ userAnswer }) => {
-    const gridTemplate = { gridTemplateRows: `repeat(${headersInfoProperties.rowHeaderValues.length}, 1fr)` };
+    const rowHeaderValues = useSelector(selectRowValues);
+    const rowPossibilities = useSelector(selectRowsPossibilities);
+    const gridTemplate = { gridTemplateRows: `repeat(${rowHeaderValues.length}, 1fr)` };
     const vertical = { gridAutoFlow: "column" };
     return (
         <div style={styles.rowHeaders}>
             <Headers
                 alignment={vertical}
-                headersValues={headersInfoProperties.rowHeaderValues}
+                headersValues={rowHeaderValues}
                 gridTemplate={gridTemplate}
                 userAnswer={userAnswer}
-                potentialSolutions={headersInfoProperties.rowsPotentialSolutions} />
+                potentialSolutions={rowPossibilities} />
         </div>
     )
 }
 
 const ColumnHeaders = ({ userAnswer }) => {
-    const gridTemplate = { gridTemplateColumns: `repeat(${headersInfoProperties.columHeaderValues.length}, 1fr)` };
+    const columnHeaderValues = useSelector(selectColumnValues);
+    const columnPossibilities = useSelector(selectColumnPossibilities);
+    const gridTemplate = { gridTemplateColumns: `repeat(${columnHeaderValues.length}, 1fr)` };
     return (
         <div style={styles.columnHeaders}>
             <Headers
-                headersValues={headersInfoProperties.columHeaderValues}
+                headersValues={columnHeaderValues}
                 gridTemplate={gridTemplate}
                 userAnswer={userAnswer}
-                potentialSolutions={headersInfoProperties.columnsPotentialSolutions} />
+                potentialSolutions={columnPossibilities} />
         </div>
     )
 }

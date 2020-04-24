@@ -1,8 +1,9 @@
 import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import Board from './Board';
 import HeadersInformation from './HeadersInformation';
 import Navigator from './Navigator';
-import * as Constants from './Constants';
+import { selectMatrix, hydrateGameInformation } from './features/gameSlice';
 
 const wrapperStyle = {
   display: "grid",
@@ -15,11 +16,15 @@ const wrapperStyle = {
 }
 
 const Game = () => {
+  const dispatch = useDispatch();
+  const matrix = useSelector(selectMatrix);
+  dispatch(hydrateGameInformation(matrix));
+
   return (
     <div style={wrapperStyle}>
       <Navigator />
       <HeadersInformation />
-      <Board numberOfRows={Constants.MATRIX.length} numberOfColumns={Constants.MATRIX[0].length} />
+      <Board numberOfRows={matrix.length} numberOfColumns={matrix[0].length} />
     </div>
   )
 }

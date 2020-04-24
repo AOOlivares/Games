@@ -1,4 +1,4 @@
-import { HeaderMethods, HeadersInformationMethods } from './HeadersInformationUtils';
+import { HeaderHelperMethods, rowValuesReducer, columnValuesReducer, calculateArrayPossibilities } from './HeadersInformationUtils';
 import * as Constants from './Constants';
 describe('HeaderMethods() Falsy', () => {
     test.each([
@@ -6,7 +6,7 @@ describe('HeaderMethods() Falsy', () => {
         [[{ hitType: Constants.CLICKTYPES.Cross, hited: true }, { hitType: Constants.CLICKTYPES.Cross, hited: true }, { hitType: Constants.CLICKTYPES.Cross, hited: true }], ['100', '010', '001']],
         [[{ hitType: Constants.CLICKTYPES.Hit, hited: true }, { hitType: Constants.CLICKTYPES.Cross, hited: true }, { hitType: Constants.CLICKTYPES.Hit, hited: true }], ['110', '011']]
     ])('userPotentialSolution returns false if user solution fail to validate', (userSolution, possibleSolutions) => {
-        expect(HeaderMethods().isUserSolutionPotentiallyValid(userSolution, possibleSolutions)).toBeFalsy();
+        expect(HeaderHelperMethods().isUserSolutionPotentiallyValid(userSolution, possibleSolutions)).toBeFalsy();
     });
 });
 
@@ -29,7 +29,7 @@ describe('HeaderMethods() Truthy', () => {
             ['100', '010', '001']
         ]
     ])('userPotentialSolution returns true if user solution pass', (userSolution, possibleSolutions) => {
-        expect(HeaderMethods().isUserSolutionPotentiallyValid(userSolution, possibleSolutions)).toBeTruthy();
+        expect(HeaderHelperMethods().isUserSolutionPotentiallyValid(userSolution, possibleSolutions)).toBeTruthy();
     });
 });
 
@@ -49,7 +49,7 @@ describe('HeadersInformationMethods()', () => {
             ]
         ]
     ])('rowValuesReducer returns the expected collection of values', (matrix, expected) => {
-        const result = HeadersInformationMethods(matrix).rowHeaderValues;
+        const result = rowValuesReducer(matrix);
         result.forEach((x, xi) => {
             x.forEach((y, yi) => {
                 expect(y).toBe(expected[xi][yi]);
@@ -69,8 +69,8 @@ describe('HeadersInformationMethods()', () => {
                 [1]
             ]
         ]
-    ])('columHeaderValues returns the expected collection of values', (matrix, expected) => {
-        const result = HeadersInformationMethods(matrix).columHeaderValues;
+    ])('columnValuesReducer returns the expected collection of values', (matrix, expected) => {
+        const result = columnValuesReducer(matrix);
         result.forEach((x, xi) => {
             x.forEach((y, yi) => {
                 expect(y).toBe(expected[xi][yi]);
@@ -81,9 +81,9 @@ describe('HeadersInformationMethods()', () => {
     test.each([
         [
             [
-                [Constants.EMPTY, Constants.HIT, Constants.HIT],
-                [Constants.HIT, Constants.EMPTY, Constants.HIT],
-                [Constants.HIT, Constants.EMPTY, Constants.EMPTY]
+                [2],
+                [1, 1],
+                [1]
             ],
             [
                 ['011', '110'],
@@ -91,30 +91,9 @@ describe('HeadersInformationMethods()', () => {
                 ['001', '010', '100']
             ]
         ]
-    ])('rowsPotentialSolutions returns the expected collection of values', (matrix, expected) => {
-        const result = HeadersInformationMethods(matrix).rowsPotentialSolutions;
-        result.forEach((x, xi) => {
-            expected[xi].forEach((y, yi) => {
-                expect(x.includes(y)).toBeTruthy()
-            });
-        })
-    });
-
-    test.each([
-        [
-            [
-                [Constants.EMPTY, Constants.HIT, Constants.HIT],
-                [Constants.HIT, Constants.EMPTY, Constants.EMPTY],
-                [Constants.HIT, Constants.EMPTY, Constants.HIT]
-            ],
-            [
-                ['011', '110'],
-                ['001', '010', '100'],
-                ['101']
-            ]
-        ]
-    ])('columnsPotentialSolutions returns the expected collection of values', (matrix, expected) => {
-        const result = HeadersInformationMethods(matrix).columnsPotentialSolutions;
+    ])('calculateArrayPossibilities returns the expected collection of values', (matrix, expected) => {
+        const result = calculateArrayPossibilities(matrix, matrix.length);
+        console.log(result);
         result.forEach((x, xi) => {
             expected[xi].forEach((y, yi) => {
                 expect(x.includes(y)).toBeTruthy()
