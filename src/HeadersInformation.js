@@ -1,11 +1,8 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import * as Constants from './Constants';
-import { HeaderHelperMethods } from './HeadersInformationUtils';
+import { isUserSolutionPotentiallyValid } from './HeadersInformationUtils';
 import { selectAnswer } from './features/answerSlice';
 import { selectRowValues, selectColumnValues, selectRowsPossibilities, selectColumnPossibilities } from './features/gameSlice';
-
-const headerHelperMethods = HeaderHelperMethods();
 
 const styles = {
     headers: {
@@ -39,7 +36,7 @@ const styles = {
 const Panel = ({ backgroundColor, value, }) => <div style={{ ...styles.panel, backgroundColor: backgroundColor }}>{value}</div>;
 
 const Header = ({ headerValues, userAnswer, possibleSolutions, alignment }) => {
-    const areTheSameStyle = headerHelperMethods.isUserSolutionPotentiallyValid(userAnswer, possibleSolutions);
+    const areTheSameStyle = isUserSolutionPotentiallyValid(userAnswer, possibleSolutions);
     const backgroundColor = areTheSameStyle ? "#79d279" : "#ff6363";
     if (headerValues.length === 0) {
         return (
@@ -111,9 +108,9 @@ const verticalChunks = (horizontalChunks, columns) => {
     return vChunks;
 }
 
-export default function HeadersInformation() {
+export default function HeadersInformation({ length }) {
     const userAnswer = useSelector(selectAnswer);
-    const vChunks = verticalChunks(userAnswer, Constants.MATRIX[0].length);
+    const vChunks = verticalChunks(userAnswer, length);
 
     return (
         <>

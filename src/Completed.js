@@ -1,4 +1,6 @@
 import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { selectMatrix, hydrateGameInformation } from './features/gameSlice';
 
 const style = {
     validationStyle: {
@@ -17,10 +19,17 @@ const style = {
 }
 
 export default function Completed() {
+    const dispatch = useDispatch();
+    const matrix = useSelector(selectMatrix);
+
+    const onClick = () => {
+        dispatch(hydrateGameInformation(matrix));
+    }
+
     return (
         <div style={style.validationStyle} >
             <div style={style.buttonWrapper}  >
-                <button >
+                <button onClick={onClick}>
                     New Game?
                 </button>
             </div>

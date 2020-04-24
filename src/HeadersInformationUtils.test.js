@@ -1,4 +1,4 @@
-import { HeaderHelperMethods, rowValuesReducer, columnValuesReducer, calculateArrayPossibilities } from './HeadersInformationUtils';
+import { isUserSolutionPotentiallyValid, rowValuesReducer, columnValuesReducer, calculateArrayPossibilities } from './HeadersInformationUtils';
 import * as Constants from './Constants';
 describe('HeaderMethods() Falsy', () => {
     test.each([
@@ -6,7 +6,7 @@ describe('HeaderMethods() Falsy', () => {
         [[{ hitType: Constants.CLICKTYPES.Cross, hited: true }, { hitType: Constants.CLICKTYPES.Cross, hited: true }, { hitType: Constants.CLICKTYPES.Cross, hited: true }], ['100', '010', '001']],
         [[{ hitType: Constants.CLICKTYPES.Hit, hited: true }, { hitType: Constants.CLICKTYPES.Cross, hited: true }, { hitType: Constants.CLICKTYPES.Hit, hited: true }], ['110', '011']]
     ])('userPotentialSolution returns false if user solution fail to validate', (userSolution, possibleSolutions) => {
-        expect(HeaderHelperMethods().isUserSolutionPotentiallyValid(userSolution, possibleSolutions)).toBeFalsy();
+        expect(isUserSolutionPotentiallyValid(userSolution, possibleSolutions)).toBeFalsy();
     });
 });
 
@@ -29,7 +29,7 @@ describe('HeaderMethods() Truthy', () => {
             ['100', '010', '001']
         ]
     ])('userPotentialSolution returns true if user solution pass', (userSolution, possibleSolutions) => {
-        expect(HeaderHelperMethods().isUserSolutionPotentiallyValid(userSolution, possibleSolutions)).toBeTruthy();
+        expect(isUserSolutionPotentiallyValid(userSolution, possibleSolutions)).toBeTruthy();
     });
 });
 

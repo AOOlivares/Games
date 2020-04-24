@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { HIT, EMPTY } from '../Constants';
 import { rowValuesReducer, columnValuesReducer, calculateArrayPossibilities } from '../HeadersInformationUtils';
+import { setAnswerToInitialState } from './answerSlice';
 
 export const gameSlice = createSlice({
     name: 'game',
@@ -49,5 +50,6 @@ export const hydrateGameInformation = (matrix) => dispatch => {
     dispatch(setColumnValues(columnValues));
     const columnPossibilities = calculateArrayPossibilities(columnValues, matrix.length);
     dispatch(setColumnsPossibilities(columnPossibilities));
+    dispatch(setAnswerToInitialState(matrix));
 }
 

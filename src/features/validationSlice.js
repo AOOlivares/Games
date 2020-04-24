@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { CLICKTYPES } from '../Constants';
+import { isUserSolutionPotentiallyValid } from '../HeadersInformationUtils';
 export const validationSlice = createSlice({
     name: 'clickType',
     initialState: {
@@ -18,3 +19,7 @@ export const selectClickType = state => state.clickType.value;
 
 export default validationSlice.reducer;
 
+export const hydrateGameInformation = (userAnswer, possibleSolutions) => dispatch => {
+    const areTheSameStyle = isUserSolutionPotentiallyValid(userAnswer, possibleSolutions);
+
+}

@@ -23,7 +23,7 @@ const Game = () => {
   return (
     <div style={wrapperStyle}>
       <Navigator />
-      <HeadersInformation />
+      <HeadersInformation length={matrix[0].length} />
       <Board numberOfRows={matrix.length} numberOfColumns={matrix[0].length} />
     </div>
   )
