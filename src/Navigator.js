@@ -2,28 +2,10 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import Completed from './Completed';
 import Menu from './Menu';
-import { EMPTY, HIT, CLICKTYPES } from './Constants';
-import { selectAnswer } from './features/answerSlice';
-import { selectMatrix } from './features/gameSlice';
+import { selectCompleted } from './features/validationSlice';
 
 export default function Navigator({ setClickType }) {
-    const answer = useSelector(selectAnswer);
-    const matrix = useSelector(selectMatrix)
-    const areTheSame = (solution, answer) => {
-        const result2 = solution.map((subArray, index) => subArray.map((value, subIndex) => {
-            let userInput = EMPTY
-            if (answer[index][subIndex].hited) {
-                if (answer[index][subIndex].hitType === CLICKTYPES.Hit) {
-                    userInput = HIT
-                }
-            }
-
-            return value === userInput;
-        }));
-        return result2.every(subArray => subArray.every(r => r === true));
-    }
-
-    const isValid = areTheSame(matrix, answer);
+    const isValid = useSelector(selectCompleted);
 
     const child = isValid
         ? <Completed />

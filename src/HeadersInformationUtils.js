@@ -1,6 +1,13 @@
 import { HIT, EMPTY, END_OF_HIT, CLICKTYPES } from './Constants'
 const getVariations = (length, minimumSpace) => {
-    if (!minimumSpace) return [EMPTY];
+    if (!minimumSpace) {
+        let empty = '';
+        for (let index = 0; index < length; index++) {
+            empty += EMPTY
+        }
+        return [empty];
+    }
+
     const numberOfVariationGroups = (length - minimumSpace.length) + 1;
     const variations = [];
     for (let index = 0; index < numberOfVariationGroups; index++) {

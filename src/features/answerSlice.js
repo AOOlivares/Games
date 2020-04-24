@@ -1,32 +1,36 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { CLICKTYPES } from '../Constants';
-const hitColors = {
-    hit: '#75daad',
-    empty: '#ffc299'
-}
+import { CLICKTYPES, HIT_COLORS } from '../Constants';
+import { validateColumns, validateRows, validatePuzzle } from './validationSlice';
+
 export const answerSlice = createSlice({
     name: 'answer',
     initialState: {
-        value: [[]]
+        rows: [[]],
+        columns: [[]]
     },
     reducers: {
         setAnswerToInitialState: (state, action) => {
-            state.value = action.payload.map((subMatrix) => subMatrix.map(() => ({ hited: false, color: hitColors.empty, value: '' })))
+            state.rows = action.payload.map((subMatrix) => subMatrix.map(() => ({ hited: false, color: HIT_COLORS.empty, value: '' })))
+            state.columns = verticalChunks(action.payload, action.payload[0].length)
         },
         setHit: (state, action) => {
             const { type, iX, iY } = action.payload;
             switch (type) {
                 case CLICKTYPES.Hit:
-                    state.value[iX][iY] = { hitType: type, hited: true, value: '', color: hitColors.hit };
+                    state.rows[iX][iY] = { hitType: type, hited: true, value: '', color: HIT_COLORS.hit };
+                    state.columns[iY][iX] = { hitType: type, hited: true, value: '', color: HIT_COLORS.hit };
                     break;
                 case CLICKTYPES.Cross:
-                    state.value[iX][iY] = { hitType: type, hited: true, value: CLICKTYPES.Cross, color: hitColors.hit }
+                    state.rows[iX][iY] = { hitType: type, hited: true, value: CLICKTYPES.Cross, color: HIT_COLORS.hit }
+                    state.columns[iY][iX] = { hitType: type, hited: true, value: CLICKTYPES.Cross, color: HIT_COLORS.hit }
                     break;
                 case CLICKTYPES.Unknown:
-                    state.value[iX][iY] = { hitType: type, hited: true, value: CLICKTYPES.Unknown, color: hitColors.hit }
+                    state.rows[iX][iY] = { hitType: type, hited: true, value: CLICKTYPES.Unknown, color: HIT_COLORS.hit }
+                    state.columns[iY][iX] = { hitType: type, hited: true, value: CLICKTYPES.Unknown, color: HIT_COLORS.hit }
                     break;
                 case CLICKTYPES.Clear:
-                    state.value[iX][iY] = { hited: false, value: '', color: hitColors.empty }
+                    state.rows[iX][iY] = { hited: false, value: '', color: HIT_COLORS.empty }
+                    state.columns[iY][iX] = { hited: false, value: '', color: HIT_COLORS.empty }
                     break;
                 default:
                     break;
@@ -37,7 +41,23 @@ export const answerSlice = createSlice({
 
 export const { setHit, setAnswerToInitialState } = answerSlice.actions;
 
-export const selectAnswer = state => state.answer.value;
+export const selectAnswerRows = state => state.answer.rows;
+export const selectAnswerColumns = state => state.answer.columns;
 
 export default answerSlice.reducer;
 
+export const setUserHit = (payload) => dispatch => {
+    dispatch(setHit(payload));
+    dispatch(validateRows());
+    dispatch(validateColumns());
+    dispatch(validatePuzzle());
+}
+
+
+const verticalChunks = (horizontalChunks, columns) => {
+    const vChunks = [];
+    for (let index = 0; index < columns; index++) {
+        vChunks.push(horizontalChunks.map((v, i, array) => array[i][index]))
+    }
+    return vChunks;
+}

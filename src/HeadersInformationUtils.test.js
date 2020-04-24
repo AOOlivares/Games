@@ -83,17 +83,18 @@ describe('HeadersInformationMethods()', () => {
             [
                 [2],
                 [1, 1],
-                [1]
+                [1],
+                []
             ],
             [
-                ['011', '110'],
-                ['101'],
-                ['001', '010', '100']
+                ['0011', '1100', '0110'],
+                ['1010', '1001', '0101'],
+                ['0001', '0010', '0100', '1000'],
+                ['0000']
             ]
         ]
     ])('calculateArrayPossibilities returns the expected collection of values', (matrix, expected) => {
         const result = calculateArrayPossibilities(matrix, matrix.length);
-        console.log(result);
         result.forEach((x, xi) => {
             expected[xi].forEach((y, yi) => {
                 expect(x.includes(y)).toBeTruthy()

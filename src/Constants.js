@@ -7,3 +7,12 @@ export const CLICKTYPES = {
     Unknown: '?',
     Clear: 'clear'
 }
+export const HIT_COLORS = {
+    hit: '#75daad',
+    empty: '#ffc299'
+}
+
+export const HEADER_COLORS = {
+    valid: "#79d279",
+    invalid: "#ff6363"
+}
