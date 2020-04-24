@@ -1,6 +1,8 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import * as Constants from './Constants';
 import { HeadersInformationProperties, HeaderHelperMethods } from './HeadersInformationUtils';
+import { selectUserSolution } from './features/userSolutionSlice';
 
 const headersInfoProperties = HeadersInformationProperties(Constants.MATRIX);
 const headerHelperMethods = HeaderHelperMethods();
@@ -110,7 +112,9 @@ const verticalChunk = (horizontalChunks, columns) => {
     return vChunks;
 }
 
-export default function HeadersInformation({ userSolution }) {
+export default function HeadersInformation() {
+    const userSolution = useSelector(selectUserSolution);
+
     const hChunks = chunk(userSolution, headersInfoProperties.columHeaderValues.length);
     const vChunks = verticalChunk(hChunks, Constants.MATRIX[0].length);
     return (
