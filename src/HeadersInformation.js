@@ -1,8 +1,8 @@
 import React from 'react';
 import { HEADER_COLORS } from './Constants';
 import { useSelector } from 'react-redux';
-import { selectAnswerRows, selectAnswerColumns } from './features/answerSlice';
-import { selectRowValues, selectColumnValues } from './features/gameSlice';
+import { selectRowsValues, selectRowsAnswer } from './features/rowsSlice';
+import { selectColumnValues, selectColumnsAnswer } from './features/columnsSlice';
 import { selectRowsValidation, selectColumnValidation } from './features/validationSlice';
 const styles = {
     headers: {
@@ -73,7 +73,7 @@ const Headers = ({ alignment, headersValues, gridTemplate, userAnswer, validatio
 )
 
 const RowHeaders = ({ userAnswer }) => {
-    const rowHeaderValues = useSelector(selectRowValues);
+    const rowHeaderValues = useSelector(selectRowsValues);
     const rowsValidation = useSelector(selectRowsValidation);
     const gridTemplate = { gridTemplateRows: `repeat(${rowHeaderValues.length}, 1fr)` };
     const vertical = { gridAutoFlow: "column" };
@@ -105,8 +105,8 @@ const ColumnHeaders = ({ userAnswer }) => {
 }
 
 export default function HeadersInformation({ length }) {
-    const userAnswerRows = useSelector(selectAnswerRows);
-    const userAnswerColumns = useSelector(selectAnswerColumns);
+    const userAnswerRows = useSelector(selectRowsAnswer);
+    const userAnswerColumns = useSelector(selectColumnsAnswer);
 
     return (
         <>

@@ -1,8 +1,8 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { CLICKTYPES } from './Constants';
-import { setUserHit, selectAnswerRows } from './features/answerSlice';
-import { selectClickType } from './features/clickTypeSlice';
+import { setUserHit, selectUserClickType } from './features/userSlice';
+import { selectRowsAnswer } from './features/rowsSlice';
 
 const styles = {
     board: {
@@ -32,7 +32,7 @@ const styles = {
 }
 
 const Cell = ({ iX, iY, cell }) => {
-    const clickType = useSelector(selectClickType);
+    const clickType = useSelector(selectUserClickType);
     const dispatch = useDispatch();
     function handleClick() {
         const type = cell.hitType === clickType
@@ -46,7 +46,7 @@ const Cell = ({ iX, iY, cell }) => {
 }
 
 const BoardGrid = ({ numberOfRows, numberOfColumns }) => {
-    const userSolution = useSelector(selectAnswerRows);
+    const userSolution = useSelector(selectRowsAnswer);
     return (
         <div style={{ ...styles.boardGrid, gridTemplateColumns: `repeat(${numberOfColumns}, 1fr)`, gridTemplateRows: `repeat(${numberOfRows}, 1fr)` }}>
             {userSolution.map((subArray, iX) => subArray.map((cell, iY) => <Cell cell={cell} iX={iX} iY={iY} key={`${iX}${iY}`} />))}

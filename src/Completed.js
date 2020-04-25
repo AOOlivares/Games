@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { selectMatrix, hydrateGameInformation } from './features/gameSlice';
+import { selectMatrix, initiateGame } from './features/gameSlice';
 
 const style = {
     validationStyle: {
@@ -23,7 +23,7 @@ export default function Completed() {
     const matrix = useSelector(selectMatrix);
 
     const onClick = () => {
-        dispatch(hydrateGameInformation(matrix));
+        dispatch(initiateGame(matrix));
     }
 
     return (

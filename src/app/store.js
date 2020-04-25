@@ -1,14 +1,16 @@
 import { configureStore } from '@reduxjs/toolkit';
 import gameReducer from '../features/gameSlice';
-import userAnswerReducer from '../features/answerSlice';
-import clickTypeReducer from '../features/clickTypeSlice';
+import userReducer from '../features/userSlice';
 import validationReducer from '../features/validationSlice';
+import rowsReducer from '../features/rowsSlice';
+import columnsReducer from '../features/columnsSlice';
 
 export default configureStore({
     reducer: {
+        user: userReducer,
         game: gameReducer,
-        answer: userAnswerReducer,
-        clickType: clickTypeReducer,
+        rows: rowsReducer,
+        columns: columnsReducer,
         validation: validationReducer,
     },
 });

@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import Board from './Board';
 import HeadersInformation from './HeadersInformation';
 import Navigator from './Navigator';
-import { selectMatrix, hydrateGameInformation } from './features/gameSlice';
+import { selectMatrix, initiateGame } from './features/gameSlice';
 
 const wrapperStyle = {
   display: "grid",
@@ -18,7 +18,7 @@ const wrapperStyle = {
 const Game = () => {
   const dispatch = useDispatch();
   const matrix = useSelector(selectMatrix);
-  dispatch(hydrateGameInformation(matrix));
+  dispatch(initiateGame(matrix));
 
   return (
     <div style={wrapperStyle}>

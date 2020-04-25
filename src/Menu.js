@@ -1,7 +1,7 @@
 import React from 'react';
 import { CLICKTYPES } from './Constants';
 import { useDispatch } from 'react-redux';
-import { setClickType } from './features/clickTypeSlice';
+import { setClickType } from './features/userSlice';
 
 const style = {
     wrapper: {
