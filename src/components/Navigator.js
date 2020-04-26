@@ -5,9 +5,9 @@ import Menu from './Menu';
 import { selectCompleted } from '../features/validationSlice';
 
 export default function Navigator({ setClickType }) {
-    const isValid = useSelector(selectCompleted);
+    const completed = useSelector(selectCompleted);
 
-    const child = isValid
+    const child = completed
         ? <Completed />
         : <Menu setClickType={setClickType} />
     return (

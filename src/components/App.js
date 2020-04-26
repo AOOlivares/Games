@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import Board from './Board';
 import HeadersInformation from './HeadersInformation';
 import Navigator from './Navigator';
-import { newPuzzle } from '../features/gameSlice';
+import { initiateGame } from '../features/gameSlice';
 
 const wrapperStyle = {
   display: "grid",
@@ -26,7 +26,7 @@ const Game = () => {
 
 const App = () => {
   const dispatch = useDispatch();
-  dispatch(newPuzzle());
+  dispatch(initiateGame());
   return <Game />
 };
 

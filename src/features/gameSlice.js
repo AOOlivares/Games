@@ -71,11 +71,9 @@ export const initiateGame = () => (dispatch, getState) => {
     dispatch(validatePuzzle());
 }
 
-export const newPuzzle = () => dispatch => {
-    // const x = getRandomInt(1, 10);
-    // const y = getRandomInt(1, 10);
-    const x = 10, y = 10;
-    let newPuzzle = [];
+export const newPuzzle = (difficulty) => dispatch => {
+    const { x, y } = newGameLengths(difficulty);
+    let puzzle = [];
     for (let i = 0; i < x; i++) {
         let subArray = [];
         for (let subI = 0; subI < y; subI++) {
@@ -83,10 +81,21 @@ export const newPuzzle = () => dispatch => {
             if (isOdd(number)) subArray.push(HIT)
             else subArray.push(EMPTY)
         }
-        newPuzzle.push(subArray)
+        puzzle.push(subArray)
     }
-    dispatch(setNewPuzzle(newPuzzle));
+    dispatch(setNewPuzzle(puzzle));
     dispatch(initiateGame());
+}
+
+const newGameLengths = (difficulty) => {
+    switch (difficulty) {
+        case 'medium':
+            return { x: 10, y: 10 };
+        case 'hard':
+            return { x: 10, y: 15 };
+        default:
+            return { x: 5, y: 5 };
+    }
 }
 
 const isOdd = (num) => num % 2;

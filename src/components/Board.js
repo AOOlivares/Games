@@ -34,15 +34,20 @@ const styles = {
 const Cell = ({ iX, iY, cell }) => {
     const clickType = useSelector(selectUserClickType);
     const dispatch = useDispatch();
-    function handleClick() {
-        const type = cell.hitType === clickType
+    function handleClick(e) {
+        e.preventDefault();
+        let innerClickType = clickType;
+        if (e.type === 'contextmenu') {
+            innerClickType = CLICKTYPES.Cross
+        }
+        const type = cell.hitType === innerClickType
             ? CLICKTYPES.Clear
-            : clickType;
+            : innerClickType;
 
         dispatch(setUserHit({ type, iX, iY }));
     }
 
-    return <div onClick={handleClick} style={{ ...styles.cell, backgroundColor: cell.color }} >{cell.value}</div>;
+    return <div onContextMenu={handleClick} onClick={handleClick} style={{ ...styles.cell, backgroundColor: cell.color }} >{cell.value}</div>;
 }
 
 const BoardGrid = () => {

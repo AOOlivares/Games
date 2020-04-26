@@ -1,6 +1,5 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
-import { newPuzzle } from '../features/gameSlice';
+import NewGame from './NewGame';
 
 const style = {
     validationStyle: {
@@ -19,18 +18,10 @@ const style = {
 }
 
 export default function Completed() {
-    const dispatch = useDispatch();
-
-    const onClick = () => {
-        dispatch(newPuzzle());
-    }
-
     return (
         <div style={style.validationStyle} >
             <div style={style.buttonWrapper}  >
-                <button onClick={onClick}>
-                    New Game?
-                </button>
+                <NewGame completed={true} />
             </div>
         </div>
     )
