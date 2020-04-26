@@ -25,10 +25,10 @@ const styles = {
     },
     rowHeaders: {
         gridColumn: "1",
-        gridRow: "2 / 4",
+        gridRow: "2 / 8",
     },
     columnHeaders: {
-        gridColumn: "2 / 4",
+        gridColumn: "2 / 8",
         gridRow: "1",
     }
 }

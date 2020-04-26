@@ -7,8 +7,8 @@ import { initiateGame } from '../features/gameSlice';
 
 const wrapperStyle = {
   display: "grid",
-  gridTemplateColumns: "repeat(3, 1fr)",
-  gridTtemplateRows: "repeat(3, 1fr)",
+  gridTemplateColumns: "repeat(7, 1fr)",
+  gridTtemplateRows: "repeat(7, 1fr)",
   gridGap: "3px",
   width: "100vw",
   height: "calc(100vh)",

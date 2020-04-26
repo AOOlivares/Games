@@ -6,8 +6,8 @@ import { selectGame, selectNumberOfRows, selectNumberOfColumns } from '../featur
 
 const styles = {
     board: {
-        gridColumn: "2 / 4",
-        gridRow: "2 / 4",
+        gridColumn: "2 / 8",
+        gridRow: "2 / 8",
         boxSizing: "border-box",
     },
     boardGrid: {
