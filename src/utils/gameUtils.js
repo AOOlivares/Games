@@ -1,4 +1,4 @@
-import { HIT, EMPTY, END_OF_HIT, CLICKTYPES } from './Constants'
+import { HIT, EMPTY, END_OF_HIT, CLICKTYPES, HIT_COLORS } from './Constants'
 const getVariations = (length, minimumSpace) => {
     if (!minimumSpace) {
         let empty = '';
@@ -97,23 +97,40 @@ export const calculateArrayPossibilities = (arrayValues, length) => arrayValues.
 
 const getAllHitIndexes = (array) => array.reduce((arr, e, i) => (((e === HIT) && arr.push(i), arr)), []);
 const getAllCrossIndexes = (array) => array.reduce((arr, e, i) => (((e.hited && e.hitType === CLICKTYPES.Cross) && arr.push(i), arr)), []);
-const getIndexes = (userInput, binaryArrayUserSolution) => ({ uHitIndex: getAllHitIndexes(binaryArrayUserSolution), uCrossIndex: getAllCrossIndexes(userInput) });
-export const isUserSolutionPotentiallyValid = (userInput, posibilities) => {
+const getIndexes = (input, binarySolution) => ({ hitIndex: getAllHitIndexes(binarySolution), crossIndex: getAllCrossIndexes(input) });
+export const isUserSolutionPotentiallyValid = (userInput, possibilities) => {
     const binaryArrayUserSolution = userInput.map((obj) => obj.hited ? obj.hitType === CLICKTYPES.Hit ? '1' : '0' : '0');
-    const { uHitIndex, uCrossIndex } = getIndexes(userInput, binaryArrayUserSolution);
+    const { hitIndex, crossIndex } = getIndexes(userInput, binaryArrayUserSolution);
 
     const bitUser = parseInt(binaryArrayUserSolution.join(''), 2);
-    return posibilities.some(posibility => {
-        const bitPos = parseInt(posibility, 2);
+    return possibilities.some(possibility => {
+        const bitPos = parseInt(possibility, 2);
         const or = bitPos | bitUser;
         const xor = or ^ bitPos;
         let xorStringAgain = xor.toString(2);
-        while (posibility.length > xorStringAgain.length) {
+        while (possibility.length > xorStringAgain.length) {
             xorStringAgain = EMPTY + xorStringAgain;
         }
 
-        const userHits = uHitIndex.every(x => xorStringAgain[x] === EMPTY);
-        const userCross = uCrossIndex.every(x => posibility[x] === EMPTY);
+        const userHits = hitIndex.every(x => xorStringAgain[x] === EMPTY);
+        const userCross = crossIndex.every(x => possibility[x] === EMPTY);
         return userHits === true && userCross === true;
+    });
+}
+
+export const isUserSolutionCompleted = (userInput, possibilities) => {
+    const binaryArrayUserSolution = userInput.map((obj) => obj.hited ? obj.hitType === CLICKTYPES.Hit ? '1' : '0' : '0');
+    const { hitIndex } = getIndexes(userInput, binaryArrayUserSolution);
+    if (hitIndex.length === 0) return undefined;
+    return possibilities.find((possibility, index) => {
+        const pHitIndex = getAllHitIndexes(Array.from(possibility));
+        return pHitIndex.every(e => hitIndex.includes(e)) && hitIndex.every(e => pHitIndex.includes(e));
+    })
+}
+
+export const parseInput = (possibility) => {
+    return Array.from(possibility).map(c => {
+        if (c === HIT) return { hitType: CLICKTYPES.Hit, hited: true, value: '', color: HIT_COLORS.hit }
+        else return { hitType: CLICKTYPES.Cross, hited: true, value: CLICKTYPES.Cross, color: HIT_COLORS.empty, auto: true }
     });
 }

@@ -1,8 +1,8 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { CLICKTYPES } from './Constants';
-import { setUserHit, selectUserClickType } from './features/userSlice';
-import { selectRowsAnswer } from './features/rowsSlice';
+import { CLICKTYPES } from '../utils/Constants';
+import { setUserHit, selectUserClickType } from '../features/userSlice';
+import { selectGame, selectNumberOfRows, selectNumberOfColumns } from '../features/gameSlice';
 
 const styles = {
     board: {
@@ -45,8 +45,10 @@ const Cell = ({ iX, iY, cell }) => {
     return <div onClick={handleClick} style={{ ...styles.cell, backgroundColor: cell.color }} >{cell.value}</div>;
 }
 
-const BoardGrid = ({ numberOfRows, numberOfColumns }) => {
-    const userSolution = useSelector(selectRowsAnswer);
+const BoardGrid = () => {
+    const userSolution = useSelector(selectGame);
+    const numberOfRows = useSelector(selectNumberOfRows);
+    const numberOfColumns = useSelector(selectNumberOfColumns);
     return (
         <div style={{ ...styles.boardGrid, gridTemplateColumns: `repeat(${numberOfColumns}, 1fr)`, gridTemplateRows: `repeat(${numberOfRows}, 1fr)` }}>
             {userSolution.map((subArray, iX) => subArray.map((cell, iY) => <Cell cell={cell} iX={iX} iY={iY} key={`${iX}${iY}`} />))}
@@ -54,9 +56,9 @@ const BoardGrid = ({ numberOfRows, numberOfColumns }) => {
     )
 }
 
-const Board = (props) =>
+const Board = () =>
     <div style={styles.board}>
-        <BoardGrid {...props} />
+        <BoardGrid />
     </div>
 
 

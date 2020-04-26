@@ -1,9 +1,9 @@
 import React from 'react';
-import { HEADER_COLORS } from './Constants';
 import { useSelector } from 'react-redux';
-import { selectRowsValues, selectRowsAnswer } from './features/rowsSlice';
-import { selectColumnValues, selectColumnsAnswer } from './features/columnsSlice';
-import { selectRowsValidation, selectColumnValidation } from './features/validationSlice';
+import { HEADER_COLORS } from '../utils/Constants';
+import { selectRowsValues, selectRowsAnswer } from '../features/rowsSlice';
+import { selectColumnValues, selectColumnsAnswer } from '../features/columnsSlice';
+import { selectRowsValidation, selectColumnValidation } from '../features/validationSlice';
 const styles = {
     headers: {
         display: "grid",
@@ -35,7 +35,7 @@ const styles = {
 
 const Panel = ({ backgroundColor, value, }) => <div style={{ ...styles.panel, backgroundColor: backgroundColor }}>{value}</div>;
 
-const Header = ({ headerValues, userAnswer, valid, alignment }) => {
+const Header = ({ headerValues, valid, alignment }) => {
     const backgroundColor = valid
         ? HEADER_COLORS.valid
         : valid === undefined
@@ -58,21 +58,20 @@ const Header = ({ headerValues, userAnswer, valid, alignment }) => {
     )
 }
 
-const Headers = ({ alignment, headersValues, gridTemplate, userAnswer, validations }) => (
+const Headers = ({ alignment, headersValues, gridTemplate, validations }) => (
     <div style={{ ...styles.headers, ...gridTemplate }}>
         {headersValues.map((headerValues, index) => (
             <Header
                 alignment={alignment}
                 key={index}
                 headerValues={headerValues}
-                userAnswer={userAnswer[index]}
                 valid={validations[index]}
             />
         ))}
     </div>
 )
 
-const RowHeaders = ({ userAnswer }) => {
+const RowHeaders = () => {
     const rowHeaderValues = useSelector(selectRowsValues);
     const rowsValidation = useSelector(selectRowsValidation);
     const gridTemplate = { gridTemplateRows: `repeat(${rowHeaderValues.length}, 1fr)` };
@@ -83,13 +82,12 @@ const RowHeaders = ({ userAnswer }) => {
                 alignment={vertical}
                 headersValues={rowHeaderValues}
                 gridTemplate={gridTemplate}
-                userAnswer={userAnswer}
                 validations={rowsValidation} />
         </div>
     )
 }
 
-const ColumnHeaders = ({ userAnswer }) => {
+const ColumnHeaders = () => {
     const columnHeaderValues = useSelector(selectColumnValues);
     const columnsValidation = useSelector(selectColumnValidation);
     const gridTemplate = { gridTemplateColumns: `repeat(${columnHeaderValues.length}, 1fr)` };
@@ -98,13 +96,12 @@ const ColumnHeaders = ({ userAnswer }) => {
             <Headers
                 headersValues={columnHeaderValues}
                 gridTemplate={gridTemplate}
-                userAnswer={userAnswer}
                 validations={columnsValidation} />
         </div>
     )
 }
 
-export default function HeadersInformation({ length }) {
+export default function HeadersInformation() {
     const userAnswerRows = useSelector(selectRowsAnswer);
     const userAnswerColumns = useSelector(selectColumnsAnswer);
 

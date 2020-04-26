@@ -1,9 +1,9 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import Board from './Board';
 import HeadersInformation from './HeadersInformation';
 import Navigator from './Navigator';
-import { selectMatrix, initiateGame } from './features/gameSlice';
+import { newPuzzle } from '../features/gameSlice';
 
 const wrapperStyle = {
   display: "grid",
@@ -12,23 +12,22 @@ const wrapperStyle = {
   gridGap: "3px",
   width: "100vw",
   height: "calc(100vh)",
-  fontSize: "40px",
 }
 
 const Game = () => {
-  const dispatch = useDispatch();
-  const matrix = useSelector(selectMatrix);
-  dispatch(initiateGame(matrix));
-
   return (
     <div style={wrapperStyle}>
       <Navigator />
-      <HeadersInformation length={matrix[0].length} />
-      <Board numberOfRows={matrix.length} numberOfColumns={matrix[0].length} />
+      <HeadersInformation />
+      <Board />
     </div>
   )
 }
 
-const App = () => <Game />;
+const App = () => {
+  const dispatch = useDispatch();
+  dispatch(newPuzzle());
+  return <Game />
+};
 
 export default App;

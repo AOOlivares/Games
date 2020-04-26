@@ -1,8 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { CLICKTYPES } from '../Constants';
-import { setRowsAnswerHit } from './rowsSlice';
-import { setColumnsAnswerHit } from './columnsSlice';
-import { validateColumns, validateRows, validatePuzzle } from './validationSlice';
+import { CLICKTYPES } from '../utils/Constants';
+import { setGameHit } from './gameSlice';
+import { validatePuzzle } from './validationSlice';
 
 export const userSlice = createSlice({
     name: 'user',
@@ -11,7 +10,7 @@ export const userSlice = createSlice({
     },
     reducers: {
         setClickType: (state, action) => {
-            state.value = action.payload
+            state.clickType = action.payload
         },
     },
 });
@@ -23,9 +22,6 @@ export const selectUserClickType = state => state.user.clickType;
 export default userSlice.reducer;
 
 export const setUserHit = (payload) => dispatch => {
-    dispatch(setRowsAnswerHit(payload));
-    dispatch(setColumnsAnswerHit(payload));
-    dispatch(validateRows());
-    dispatch(validateColumns());
+    dispatch(setGameHit(payload));
     dispatch(validatePuzzle());
 }

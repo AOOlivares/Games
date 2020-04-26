@@ -1,6 +1,6 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { selectMatrix, initiateGame } from './features/gameSlice';
+import { useDispatch } from 'react-redux';
+import { newPuzzle } from '../features/gameSlice';
 
 const style = {
     validationStyle: {
@@ -20,10 +20,9 @@ const style = {
 
 export default function Completed() {
     const dispatch = useDispatch();
-    const matrix = useSelector(selectMatrix);
 
     const onClick = () => {
-        dispatch(initiateGame(matrix));
+        dispatch(newPuzzle());
     }
 
     return (

@@ -1,4 +1,4 @@
-import { isUserSolutionPotentiallyValid, rowValuesReducer, columnValuesReducer, calculateArrayPossibilities } from './HeadersInformationUtils';
+import { isUserSolutionPotentiallyValid, rowValuesReducer, columnValuesReducer, calculateArrayPossibilities, isUserSolutionCompleted } from './gameUtils';
 import * as Constants from './Constants';
 describe('HeaderMethods() Falsy', () => {
     test.each([
@@ -30,6 +30,40 @@ describe('HeaderMethods() Truthy', () => {
         ]
     ])('userPotentialSolution returns true if user solution pass', (userSolution, possibleSolutions) => {
         expect(isUserSolutionPotentiallyValid(userSolution, possibleSolutions)).toBeTruthy();
+    });
+
+    test.each([
+        [
+            [
+                { hitType: Constants.CLICKTYPES.Hit, hited: true },
+                { hitType: Constants.CLICKTYPES.Cross, hited: true },
+                { hited: false }
+            ],
+            ['100', '010', '001']
+        ]
+    ])('isUserSolutionCompleted returns true when userHits completed possibility hits', (userSolution, possibleSolutions) => {
+        expect(isUserSolutionCompleted(userSolution, possibleSolutions)).toBe('100');
+    });
+
+    test.each([
+        [
+            [
+                { hitType: Constants.CLICKTYPES.Cross, hited: true },
+                { hitType: Constants.CLICKTYPES.Cross, hited: true },
+                { hited: false }
+            ],
+            ['100', '010', '001']
+        ],
+        [
+            [
+                { hitType: Constants.CLICKTYPES.Hit, hited: true },
+                { hitType: Constants.CLICKTYPES.Hit, hited: true },
+                { hited: false }
+            ],
+            ['100', '010', '001']
+        ]
+    ])('isUserSolutionCompleted returns undefined when userHits do not completed possibility hits', (userSolution, possibleSolutions) => {
+        expect(isUserSolutionCompleted(userSolution, possibleSolutions)).toBe(undefined);
     });
 });
 
