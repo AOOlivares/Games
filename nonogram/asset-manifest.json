@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/nonogram/static/css/main.5ecd60fb.chunk.css",
+    "main.js": "/nonogram/static/js/main.c32d10c8.chunk.js",
+    "main.js.map": "/nonogram/static/js/main.c32d10c8.chunk.js.map",
+    "runtime-main.js": "/nonogram/static/js/runtime-main.7b49619b.js",
+    "runtime-main.js.map": "/nonogram/static/js/runtime-main.7b49619b.js.map",
+    "static/js/2.dc8e3c92.chunk.js": "/nonogram/static/js/2.dc8e3c92.chunk.js",
+    "static/js/2.dc8e3c92.chunk.js.map": "/nonogram/static/js/2.dc8e3c92.chunk.js.map",
+    "index.html": "/nonogram/index.html",
+    "precache-manifest.9ca1ad33181e882b980dc8f30da5bc44.js": "/nonogram/precache-manifest.9ca1ad33181e882b980dc8f30da5bc44.js",
+    "service-worker.js": "/nonogram/service-worker.js",
+    "static/css/main.5ecd60fb.chunk.css.map": "/nonogram/static/css/main.5ecd60fb.chunk.css.map",
+    "static/js/2.dc8e3c92.chunk.js.LICENSE.txt": "/nonogram/static/js/2.dc8e3c92.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.7b49619b.js",
+    "static/js/2.dc8e3c92.chunk.js",
+    "static/css/main.5ecd60fb.chunk.css",
+    "static/js/main.c32d10c8.chunk.js"
+  ]
+}
