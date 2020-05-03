@@ -4,8 +4,10 @@
   "description": "Collection of games",
   "main": "index.js",
   "scripts": {
-    "nonogram-build": "cd games/nonogram && npm run build && mv ./build/ ../../build/nonogram",
-    "predeploy": "npm run nonogram-build",
+    "nonogram": "cd games/nonogram && npm run build && mv ./build/ ../../build/nonogram",
+    "sudoku": "cd games/sudoku && npm run build && mv ./build/ ../../build/sudoku",
+    "cleanup": "rm -rf ./build && mkdir -p build && cp index.html build",
+    "predeploy": "npm run cleanup && npm run nonogram && npm run sudoku",
     "deploy": "gh-pages -d build"
   },
   "repository": {
@@ -19,6 +21,7 @@
   },
   "homepage": "https://github.com/AOOlivares/Games#readme",
   "devDependencies": {
+    "del-cli": "^3.0.0",
     "gh-pages": "^2.2.0"
   }
 }
