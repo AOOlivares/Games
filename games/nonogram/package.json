@@ -1,8 +1,8 @@
 {
-  "name": "nonograms",
+  "name": "nonogram",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://aoolivares.github.io/Nonogram",
+  "homepage": "http://aoolivares.github.io/Games/nonogram",
   "dependencies": {
     "@reduxjs/toolkit": "^1.3.5",
     "@testing-library/jest-dom": "^4.2.4",

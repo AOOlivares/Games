@@ -4,6 +4,8 @@
   "description": "Collection of games",
   "main": "index.js",
   "scripts": {
+    "nonogram-build": "cd games/nonogram && npm run build && mv ./build/ ../../build/nonogram",
+    "predeploy": "npm run nonogram-build",
     "deploy": "gh-pages -d build"
   },
   "repository": {
