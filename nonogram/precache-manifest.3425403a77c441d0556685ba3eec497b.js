@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "be2c9ad4b589a2885ae18ca6505d78c9",
+    "revision": "b92ab4cfd135fd2246adbf17865966c5",
     "url": "/Games/nonogram/index.html"
   },
   {
-    "revision": "986e36d37d8d2153d374",
+    "revision": "d24c033bf62e16bec89b",
     "url": "/Games/nonogram/static/css/main.5ecd60fb.chunk.css"
   },
   {
@@ -16,11 +16,11 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/Games/nonogram/static/js/2.dc8e3c92.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "986e36d37d8d2153d374",
-    "url": "/Games/nonogram/static/js/main.c32d10c8.chunk.js"
+    "revision": "d24c033bf62e16bec89b",
+    "url": "/Games/nonogram/static/js/main.ae427fce.chunk.js"
   },
   {
-    "revision": "59eb052f09e367328783",
-    "url": "/Games/nonogram/static/js/runtime-main.7b49619b.js"
+    "revision": "d7c6d4f711d0ce1706c5",
+    "url": "/Games/nonogram/static/js/runtime-main.579b4b18.js"
   }
 ]);

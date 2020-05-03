@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/Games/nonogram/precache-manifest.9ca1ad33181e882b980dc8f30da5bc44.js"
+  "/Games/nonogram/precache-manifest.3425403a77c441d0556685ba3eec497b.js"
 );
 
 self.addEventListener('message', (event) => {
@@ -34,6 +34,6 @@ self.__precacheManifest = [].concat(self.__precacheManifest || []);
 workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
 
 workbox.routing.registerNavigationRoute(workbox.precaching.getCacheKeyForURL("/Games/nonogram/index.html"), {
-
-  blacklist: [/^\/_/, /\/[^\/?]+\.[^\/]+$/],
+  
+  blacklist: [/^\/_/,/\/[^\/?]+\.[^\/]+$/],
 });
