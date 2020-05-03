@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/Games/nonogram/static/css/main.5ecd60fb.chunk.css",
+    "main.js": "/Games/nonogram/static/js/main.23606add.chunk.js",
+    "main.js.map": "/Games/nonogram/static/js/main.23606add.chunk.js.map",
+    "runtime-main.js": "/Games/nonogram/static/js/runtime-main.f6cd366e.js",
+    "runtime-main.js.map": "/Games/nonogram/static/js/runtime-main.f6cd366e.js.map",
+    "static/js/2.1c7a85aa.chunk.js": "/Games/nonogram/static/js/2.1c7a85aa.chunk.js",
+    "static/js/2.1c7a85aa.chunk.js.map": "/Games/nonogram/static/js/2.1c7a85aa.chunk.js.map",
+    "index.html": "/Games/nonogram/index.html",
+    "precache-manifest.a9b382f9bb5e73284e6e5cb84ddd0ca8.js": "/Games/nonogram/precache-manifest.a9b382f9bb5e73284e6e5cb84ddd0ca8.js",
+    "service-worker.js": "/Games/nonogram/service-worker.js",
+    "static/css/main.5ecd60fb.chunk.css.map": "/Games/nonogram/static/css/main.5ecd60fb.chunk.css.map",
+    "static/js/2.1c7a85aa.chunk.js.LICENSE.txt": "/Games/nonogram/static/js/2.1c7a85aa.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.f6cd366e.js",
+    "static/js/2.1c7a85aa.chunk.js",
+    "static/css/main.5ecd60fb.chunk.css",
+    "static/js/main.23606add.chunk.js"
+  ]
+}
