@@ -1,43 +1,21 @@
 {
-  "name": "nonograms",
-  "version": "0.1.0",
-  "private": true,
-  "homepage": "http://aoolivares.github.io/Nonogram",
-  "dependencies": {
-    "@reduxjs/toolkit": "^1.3.5",
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.5.0",
-    "@testing-library/user-event": "^7.2.1",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
-    "react-modal": "^3.11.2",
-    "react-redux": "^7.2.0",
-    "react-scripts": "3.4.1"
-  },
+  "name": "games",
+  "version": "1.0.0",
+  "description": "Collection of games",
+  "main": "index.js",
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "test:debug": "react-scripts --inspect-brk test --runInBand --no-cache",
-    "eject": "react-scripts eject",
-    "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
   },
-  "eslintConfig": {
-    "extends": "react-app"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AOOlivares/Games.git"
   },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+  "author": "Albert de la Ossa Olivares",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AOOlivares/Games/issues"
   },
+  "homepage": "https://github.com/AOOlivares/Games#readme",
   "devDependencies": {
     "gh-pages": "^2.2.0"
   }

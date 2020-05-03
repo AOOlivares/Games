@@ -10,7 +10,7 @@ export const gameSlice = createSlice({
         puzzle: [
             [EMPTY, EMPTY, HIT],
             [HIT, EMPTY, EMPTY],
-            [HIT, EMPTY, EMPTY],
+            [HIT, HIT, EMPTY],
         ],
         game: [[]]
     },
