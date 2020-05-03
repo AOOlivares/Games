@@ -1,3 +1,3 @@
 # Games
 
-* [Nonogram](.games/nonogram/README.md)
+* [Nonogram](games/nonogram/README.md)
