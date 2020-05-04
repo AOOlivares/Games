@@ -1,23 +1,23 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "0c29406d60aeea41d40a8f83b55aa5d1",
+    "revision": "cb8aceb9c15d57cbb3c1e9cd5d9b871e",
     "url": "/Games/sudoku/index.html"
   },
   {
-    "revision": "1eefdced3adc9fe7c3fc",
-    "url": "/Games/sudoku/static/css/main.a3c800ab.chunk.css"
+    "revision": "7aeadd032305ecf37b4c",
+    "url": "/Games/sudoku/static/css/main.a493ccf4.chunk.css"
   },
   {
-    "revision": "3e8a44e224dca0f22571",
-    "url": "/Games/sudoku/static/js/2.6304ab4d.chunk.js"
+    "revision": "1d4a734cbfeec1a21dc2",
+    "url": "/Games/sudoku/static/js/2.4c462405.chunk.js"
   },
   {
     "revision": "c64c486544348f10a6d6c716950bc223",
-    "url": "/Games/sudoku/static/js/2.6304ab4d.chunk.js.LICENSE.txt"
+    "url": "/Games/sudoku/static/js/2.4c462405.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "1eefdced3adc9fe7c3fc",
-    "url": "/Games/sudoku/static/js/main.9851be0a.chunk.js"
+    "revision": "7aeadd032305ecf37b4c",
+    "url": "/Games/sudoku/static/js/main.18707711.chunk.js"
   },
   {
     "revision": "4474025b2266e77bdc5b",
