@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/Games/sudoku/precache-manifest.cd6a2b077912bd77167691c816b88e1f.js"
+  "/Games/sudoku/precache-manifest.d7fcd7776ad4682db51b9bec3b5c1a23.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "sudoku"});
