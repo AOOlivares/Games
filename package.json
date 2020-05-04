@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "nonogram": "cd games/nonogram && npm run build && mv ./build/ ../../build/nonogram",
-    "sudoku": "cd games/sudoku && npm run build && mv ./build/ ../../build/sudoku",
+    "sudoku": "cd games/sudoku && npm run build && mv ./dist/ ../../build/sudoku",
     "cleanup": "rm -rf ./build && mkdir -p build && cp index.html build",
     "predeploy": "npm run cleanup && npm run nonogram && npm run sudoku",
     "deploy": "gh-pages -d build"
@@ -14,14 +14,13 @@
     "type": "git",
     "url": "git+https://github.com/AOOlivares/Games.git"
   },
-  "author": "Albert de la Ossa Olivares",
+  "author": "Alberto de la Ossa Olivares",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/AOOlivares/Games/issues"
   },
-  "homepage": "https://github.com/AOOlivares/Games#readme",
+  "homepage": "https://github.com/AOOlivares/Games",
   "devDependencies": {
-    "del-cli": "^3.0.0",
     "gh-pages": "^2.2.0"
   }
 }
